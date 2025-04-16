@@ -17,6 +17,7 @@ import { username as usernameAtom } from "../atoms/user";
 import { results as resultsAtom } from "../atoms/results";
 import { colors } from "../theme/colors";
 import { compare } from "../engine/engine";
+import { random } from "../utils/random";
 
 type Players = {
   player1: "" | Value;
@@ -67,7 +68,7 @@ const Game = () => {
 
   const handleGamePlay = (evt: SelectChangeEvent) => {
     const player1 = evt.target.value as Value;
-    const player2 = values[Math.floor(Math.random() * values.length - 1)];
+    const player2 = values[random(0, values.length)];
 
     calculateWinner(player1, player2);
 
