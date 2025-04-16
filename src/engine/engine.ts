@@ -1,5 +1,9 @@
-type value = 'lizard'|'paper'|'rock'|'scissors'|'spock';
-
+export type Value = 'lizard'|'paper'|'rock'|'scissors'|'spock';
+export type Result = {
+    winner:string,
+    value?: string,
+    reason: string
+}
 
 
 const data:any = {
@@ -9,7 +13,6 @@ const data:any = {
     }},
     paper: {wins: {
         rock: "Wraps rock",
-        spock: "Disproves Spock"
     }},
     rock: {
         wins: {
@@ -31,7 +34,7 @@ const data:any = {
     },
 }
 
-export const compare = (player1:value, player2:value) => {
+export const compare = (player1:Value, player2:Value) => {
     if(player1 === player2) {
         return {
             winner: 'draw',
