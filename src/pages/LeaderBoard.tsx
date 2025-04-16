@@ -1,12 +1,13 @@
 import { useAtom } from "jotai";
+import { Typography } from "@mui/material";
+
+import { colors } from "../theme/colors";
 import { results as resultsAtom } from "../atoms/results";
 import { username as usernameAtom } from "../atoms/user";
-import { Typography } from "@mui/material";
-import { colors } from "../theme/colors";
 
 const LeaderBoard = () => {
   const [results] = useAtom(resultsAtom);
-  const [name] = useAtom(usernameAtom);
+  const [username] = useAtom(usernameAtom);
 
   const resultValues = JSON.parse(results as string);
 
@@ -17,7 +18,7 @@ const LeaderBoard = () => {
       </Typography>
 
       <div>
-        {name}: {resultValues.player1}
+        {username}: {resultValues.player1}
       </div>
 
       <div>Sheldon: {resultValues.player2}</div>
