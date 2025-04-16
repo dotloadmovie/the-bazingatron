@@ -5,13 +5,19 @@ const Game = () => {
   const [username, setUsername] = useAtom(usernameAtom);
 
   return (
-    <div
-      onClick={() => {
-        setUsername("Dave");
-      }}
-    >
-      Game, {username}
-    </div>
+    <>
+      {username === "" ? (
+        <div
+          onClick={() => {
+            setUsername("Dave");
+          }}
+        >
+          Set username to Dave
+        </div>
+      ) : (
+        <div>Hi {username}, welcome to the Game</div>
+      )}
+    </>
   );
 };
 
