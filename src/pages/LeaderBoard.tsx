@@ -1,20 +1,26 @@
 import { useAtom } from "jotai";
 import { results as resultsAtom } from "../atoms/results";
+import { username as usernameAtom } from "../atoms/user";
+import { Typography } from "@mui/material";
+import { colors } from "../theme/colors";
 
 const LeaderBoard = () => {
-  const [results, setResults] = useAtom(resultsAtom);
+  const [results] = useAtom(resultsAtom);
+  const [name] = useAtom(usernameAtom);
+
+  const resultValues = JSON.parse(results as string);
 
   return (
-    <div
-      onClick={() => {
-        const currentResults = JSON.parse(results);
+    <div>
+      <Typography variant="h1" sx={{ color: colors.primary }}>
+        The Leaderboard!
+      </Typography>
 
-        currentResults.player1 += 1;
+      <div>
+        {name}: {resultValues.player1}
+      </div>
 
-        setResults(JSON.stringify(currentResults));
-      }}
-    >
-      LeaderBoard {results}
+      <div>Sheldon: {resultValues.player2}</div>
     </div>
   );
 };
