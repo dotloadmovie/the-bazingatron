@@ -2,8 +2,8 @@ import { useAtom } from "jotai";
 import { Typography } from "@mui/material";
 
 import { colors } from "../theme/colors";
-import { results as resultsAtom } from "../atoms/results";
-import { username as usernameAtom } from "../atoms/user";
+import { resultsAtom } from "../atoms/results";
+import { usernameAtom } from "../atoms/user";
 
 const LeaderBoard = () => {
   const [results] = useAtom(resultsAtom);

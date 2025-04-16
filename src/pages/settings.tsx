@@ -6,13 +6,13 @@ import {
   Button,
   Snackbar,
 } from "@mui/material";
-import { colors } from "../theme/colors";
 import { useAtom } from "jotai";
-
-import { username as usernameAtom } from "../atoms/user";
-import { results as resultsAtom } from "../atoms/results";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+
+import { colors } from "../theme/colors";
+import { usernameAtom } from "../atoms/user";
+import { resultsAtom } from "../atoms/results";
 
 const Settings = () => {
   const [username, setUsername] = useAtom(usernameAtom);

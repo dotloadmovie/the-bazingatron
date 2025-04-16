@@ -3,13 +3,13 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import { Typography } from "@mui/material";
-import { Routes, Route, Link, Navigate } from "react-router";
+import { Routes, Route, Link } from "react-router";
 import { useAtom } from "jotai";
 
-import { username as usernameAtom } from "../atoms/user";
-import { colors } from "../theme/colors";
-import { Game, Settings, LeaderBoard } from "../pages";
-import ProtectedRoute from "../components/protectedroutes/ProtectedRoutes";
+import { usernameAtom } from "./atoms/user";
+import { colors } from "./theme/colors";
+import { Game, Settings, LeaderBoard } from "./pages";
+import ProtectedRoute from "./components/protectedroutes/protectedroutes";
 
 function App() {
   const [username] = useAtom(usernameAtom);

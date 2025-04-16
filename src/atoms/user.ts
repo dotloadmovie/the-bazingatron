@@ -1,6 +1,6 @@
 import {atomWithStorage, createJSONStorage} from 'jotai/utils';
 
 const storage = createJSONStorage(() => sessionStorage);
-const username = atomWithStorage('username', '', storage);
+const usernameAtom = atomWithStorage('username', '', storage);
 
-export {username}
+export {usernameAtom}
