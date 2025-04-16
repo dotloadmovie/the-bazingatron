@@ -13,8 +13,8 @@ import {
 import { useAtom } from "jotai";
 
 import { Value, Result } from "../engine/engine";
-import { username as usernameAtom } from "../atoms/user";
-import { results as resultsAtom } from "../atoms/results";
+import { usernameAtom } from "../atoms/user";
+import { resultsAtom } from "../atoms/results";
 import { colors } from "../theme/colors";
 import { compare } from "../engine/engine";
 import { random } from "../utils/random";
@@ -80,7 +80,7 @@ const Game = () => {
     setPlayers({ player1: "", player2: "" });
   };
 
-  const renderGameCore = () => {
+  const renderGame = () => {
     if (!players.player1) {
       return (
         <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
@@ -165,7 +165,7 @@ const Game = () => {
             wits against the fiendish mind of Sheldon Cooper.
           </Typography>
 
-          {renderGameCore()}
+          {renderGame()}
         </div>
       )}
     </>

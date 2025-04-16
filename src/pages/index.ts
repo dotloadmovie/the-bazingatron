@@ -1,5 +1,5 @@
-import Game from './Game';
-import Settings from './Settings';
-import LeaderBoard from './LeaderBoard';
+import Game from './game';
+import Settings from './settings';
+import LeaderBoard from './leaderboard';
 
 export {Game, Settings, LeaderBoard}
