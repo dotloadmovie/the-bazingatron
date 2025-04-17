@@ -1,18 +1,22 @@
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import Toolbar from "@mui/material/Toolbar";
-import { Typography } from "@mui/material";
-import { Routes, Route, Link } from "react-router";
+import { Routes, Route } from "react-router";
 import { useAtom } from "jotai";
 
 import { usernameAtom } from "./atoms/user";
 import { colors } from "./theme/colors";
 import { Game, Settings, LeaderBoard } from "./pages";
 import ProtectedRoute from "./components/protectedroutes/protectedroutes";
+import Header from "./components/header/header";
+import logo from "./assets/logo.svg";
+import Menu from "./components/menu/menu";
 
 function App() {
   const [username] = useAtom(usernameAtom);
+
+  const renderMenu = () => {
+    return username === "" ? <></> : <Menu />;
+  };
 
   return (
     <>
@@ -22,39 +26,7 @@ function App() {
         sx={{ background: colors.primary }}
       >
         <Container>
-          <Toolbar disableGutters>
-            <Typography
-              component="div"
-              sx={{
-                flexGrow: 1,
-                color: colors.secondary,
-                WebkitTextStroke: `1px ${colors.white}`,
-              }}
-              variant="h3"
-            >
-              Bazingatron!
-            </Typography>
-
-            {username !== "" && (
-              <>
-                <Button color="inherit">
-                  <Link style={{ color: "white" }} to="/">
-                    Game
-                  </Link>
-                </Button>
-                <Button color="inherit">
-                  <Link style={{ color: "white" }} to="/leaderboard">
-                    Leader Board
-                  </Link>
-                </Button>
-                <Button color="inherit">
-                  <Link style={{ color: "white" }} to="/settings">
-                    Settings
-                  </Link>
-                </Button>
-              </>
-            )}
-          </Toolbar>
+          <Header logo={<img src={logo} />} menu={renderMenu()} />
         </Container>
       </AppBar>
       <Container>
