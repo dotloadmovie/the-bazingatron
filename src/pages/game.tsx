@@ -9,6 +9,8 @@ import {
   Card,
   CardContent,
   SelectChangeEvent,
+  TextField,
+  Grid,
 } from "@mui/material";
 import { useAtom } from "jotai";
 
@@ -18,6 +20,7 @@ import { resultsAtom } from "../atoms/results";
 import { colors } from "../theme/colors";
 import { compare } from "../engine/engine";
 import { random } from "../utils/random";
+import Block from "../components/block/block";
 
 type Players = {
   player1: "" | Value;
@@ -27,6 +30,8 @@ type Players = {
 const Game = () => {
   const [username, setUsername] = useAtom(usernameAtom);
   const [results, setResults] = useAtom(resultsAtom);
+
+  const [localname, setLocalname] = useState("");
 
   const [players, setPlayers] = useState<Players>({
     player1: "",
@@ -50,9 +55,7 @@ const Game = () => {
       return "It was a draw!";
     }
 
-    return `${
-      winner?.winner === "player1" ? "You" : "Sheldon"
-    }, because ${winner?.value?.toUpperCase()} ${winner?.reason.toUpperCase()}`;
+    return `because ${winner?.value?.toUpperCase()} ${winner?.reason.toUpperCase()}`;
   };
 
   const calculateWinner = (player1: Value, player2: Value) => {
@@ -80,92 +83,120 @@ const Game = () => {
     setPlayers({ player1: "", player2: "" });
   };
 
+  const handleNameChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setLocalname(evt.target.value);
+  };
+
+  const handleNameSave = () => {
+    setUsername(localname);
+  };
+
+  const renderSplash = () => {
+    return (
+      <Block>
+        <Typography variant="h1" sx={{ color: colors.primary }}>
+          Welcome!
+        </Typography>
+        <p>Please enter a username to begin the game</p>
+        <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
+          <Grid container display="flex">
+            <Grid>
+              <TextField
+                sx={{ width: 200 }}
+                id="user-name"
+                label="Set username"
+                defaultValue={""}
+                variant="outlined"
+                onChange={handleNameChange}
+              />
+            </Grid>
+            <Grid>
+              {" "}
+              <Button
+                sx={{
+                  background: colors.primary,
+                  color: colors.white,
+                  paddingTop: "15px",
+                  paddingBottom: "15px",
+                }}
+                onClick={handleNameSave}
+              >
+                Save
+              </Button>
+            </Grid>
+          </Grid>
+        </FormControl>
+      </Block>
+    );
+  };
+
   const renderGame = () => {
     if (!players.player1) {
       return (
-        <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-          <Select value={players.player1} onChange={handleGamePlay}>
-            <MenuItem disabled value="">
-              Choose your weapon!
-            </MenuItem>
+        <>
+          <Typography variant="h1" sx={{ color: colors.primary }}>
+            The Game!
+          </Typography>
+          <p>
+            Welcome {username as string}, you seem a worthy opponent. Choose
+            your weapon in the game of lizard, paper, rock, scissors, spock.
+          </p>
 
-            {values.map((val) => {
-              return (
-                <MenuItem value={val} key={val}>
-                  {val.toUpperCase()}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
+          <FormControl sx={{ m: 1, width: 200, mt: 3 }}>
+            <Select value={players.player1} onChange={handleGamePlay}>
+              <MenuItem disabled value="">
+                Choose your weapon!
+              </MenuItem>
+
+              {values.map((val) => {
+                return (
+                  <MenuItem value={val} key={val}>
+                    {val.toUpperCase()}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </>
       );
     }
 
     return (
-      <Box>
-        <Card>
-          <CardContent>
-            <Typography
-              gutterBottom
-              sx={{ color: colors.primary, fontSize: 14 }}
-            >
-              You chose
-            </Typography>
-            <Typography variant="h2">
-              {players.player1.toUpperCase()}
-            </Typography>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent>
-            <Typography
-              gutterBottom
-              sx={{ color: colors.primary, fontSize: 14 }}
-            >
-              Sheldon chose
-            </Typography>
-            <Typography variant="h2">
-              {players.player2?.toUpperCase()}
-            </Typography>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent>
-            <Typography
-              gutterBottom
-              sx={{ color: colors.primary, fontSize: 14 }}
-            >
-              The winner is...
-            </Typography>
-            <Typography variant="h2">{renderWinner()}</Typography>
-          </CardContent>
-        </Card>
-        <Button onClick={handleRestart}>Play Again?</Button>
-      </Box>
+      <>
+        <Typography variant="h1" sx={{ color: colors.primary }}>
+          {winner?.winner === "draw" && "It was a draw!"}
+          {winner?.winner !== "draw" && (
+            <>{winner?.winner === "player1" ? "You won!" : "Computer won!"}</>
+          )}
+          <br />
+          <>
+            ({players.player1} v {players.player2})
+          </>
+        </Typography>
+        <Typography variant="h4">{renderWinner()}</Typography>
+
+        <Button
+          onClick={handleRestart}
+          sx={{
+            background: colors.primary,
+            color: colors.white,
+            paddingTop: "15px",
+            paddingBottom: "15px",
+          }}
+        >
+          Play Again?
+        </Button>
+      </>
     );
   };
 
   return (
     <>
       {username === "" ? (
-        <div
-          onClick={() => {
-            setUsername("Dave");
-          }}
-        >
-          Set username to Dave
-        </div>
+        renderSplash()
       ) : (
         <div>
-          <Typography variant="h1" sx={{ color: colors.primary }}>
-            The Game!
-          </Typography>
-          <Typography variant="body1">
-            Welcome {username as string}, you seem a worthy opponent. Pit your
-            wits against the fiendish mind of Sheldon Cooper.
-          </Typography>
-
-          {renderGame()}
+          <Block>{renderGame()}</Block>
         </div>
       )}
     </>

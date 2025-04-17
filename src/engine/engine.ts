@@ -13,6 +13,7 @@ const data:any = {
     }},
     paper: {wins: {
         rock: "Wraps rock",
+        spock: "Disproves Spock"
     }},
     rock: {
         wins: {

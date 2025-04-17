@@ -5,6 +5,7 @@ import {
   TextField,
   Button,
   Snackbar,
+  Grid,
 } from "@mui/material";
 import { useAtom } from "jotai";
 import { useState } from "react";
@@ -13,6 +14,8 @@ import { useNavigate } from "react-router";
 import { colors } from "../theme/colors";
 import { usernameAtom } from "../atoms/user";
 import { resultsAtom } from "../atoms/results";
+
+import Block from "../components/block/block";
 
 const Settings = () => {
   const [username, setUsername] = useAtom(usernameAtom);
@@ -47,44 +50,59 @@ const Settings = () => {
   };
 
   return (
-    <div>
+    <Block>
       <Typography variant="h1" sx={{ color: colors.primary }}>
-        The Settings!
+        Settings!
       </Typography>
 
-      <div>
-        <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-          <TextField
-            id="user-name"
-            label="Set username"
-            variant="standard"
-            value={localname}
-            onChange={handleNameChange}
-          />
-          <Button
-            sx={{ background: colors.secondary, color: colors.white }}
-            onClick={handleNameSave}
-          >
-            Save
-          </Button>
-        </FormControl>
+      <Grid container sx={{ marginTop: "20px" }}>
+        <Grid>
+          <FormControl sx={{ m: 1, mt: 3 }}>
+            <Button
+              sx={{ background: colors.primary, color: colors.white }}
+              onClick={handleResetGame}
+            >
+              Reset game
+            </Button>
+            <Snackbar
+              open={snackbar}
+              autoHideDuration={6000}
+              onClose={handleCloseSnackbar}
+              message={"Username saved"}
+            />
+          </FormControl>
+        </Grid>
 
-        <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-          <Button
-            sx={{ background: colors.secondary, color: colors.white }}
-            onClick={handleResetGame}
-          >
-            Reset game
-          </Button>
-          <Snackbar
-            open={snackbar}
-            autoHideDuration={6000}
-            onClose={handleCloseSnackbar}
-            message={"Username saved"}
-          />
-        </FormControl>
-      </div>
-    </div>
+        <Grid size={{ xs: 12 }}>
+          <FormControl sx={{ m: 1, mt: 3 }}>
+            <Grid container display="flex">
+              <Grid>
+                <TextField
+                  id="user-name"
+                  label="Set username"
+                  variant="outlined"
+                  value={localname}
+                  onChange={handleNameChange}
+                />
+              </Grid>
+              <Grid>
+                <Button
+                  sx={{
+                    background: colors.primary,
+                    color: colors.white,
+                    paddingTop: "14px",
+                    paddingBottom: "14px",
+                  }}
+                  onClick={handleNameSave}
+                >
+                  Save
+                </Button>
+              </Grid>
+            </Grid>
+          </FormControl>
+        </Grid>
+      </Grid>
+    </Block>
   );
 };
 
