@@ -6,7 +6,7 @@
 
 The app is bootstrapped from Vite. To begin, clone the repo and run `pnpm i` to install the dependencies
 
-## COmmands
+## Commands
 
 To run the application locally `pnpm dev`
 
