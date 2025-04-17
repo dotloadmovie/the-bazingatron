@@ -1,4 +1,4 @@
-import { MenuItem, MenuStyled } from "./menu.styles";
+import { MenuItem, MenuStyled } from "./menu.styled";
 import { Link } from "react-router";
 
 const Menu = () => {

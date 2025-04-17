@@ -1,4 +1,4 @@
-import { HeaderWrapper } from "./header.style";
+import { HeaderWrapper } from "./header.styled";
 import { Grid } from "@mui/material";
 
 type HeaderProps = {

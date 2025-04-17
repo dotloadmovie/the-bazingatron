@@ -1,15 +1,14 @@
-import AppBar from "@mui/material/AppBar";
-import Container from "@mui/material/Container";
 import { Routes, Route } from "react-router";
 import { useAtom } from "jotai";
+import { Grid, Container } from "@mui/material";
 
 import { usernameAtom } from "./atoms/user";
-import { colors } from "./theme/colors";
 import { Game, Settings, LeaderBoard } from "./pages";
 import ProtectedRoute from "./components/protectedroutes/protectedroutes";
 import Header from "./components/header/header";
 import logo from "./assets/logo.svg";
 import Menu from "./components/menu/menu";
+import Content from "./components/content/content";
 
 function App() {
   const [username] = useAtom(usernameAtom);
@@ -20,36 +19,48 @@ function App() {
 
   return (
     <>
-      <AppBar
-        elevation={0}
-        position="static"
-        sx={{ background: colors.primary }}
+      <Grid
+        container
+        display={"flex"}
+        sx={{ height: "calc(100vh - 20px)" }}
+        direction={"column"}
       >
-        <Container>
-          <Header logo={<img src={logo} />} menu={renderMenu()} />
-        </Container>
-      </AppBar>
-      <Container>
-        <Routes>
-          <Route path="/" element={<Game />} />
-          <Route
-            path="/leaderboard"
-            element={
-              <ProtectedRoute username={username as string}>
-                <LeaderBoard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              <ProtectedRoute username={username as string}>
-                <Settings />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </Container>
+        <Grid size={{ xs: 12 }} display={"flex"}>
+          <Container>
+            <Header logo={<img src={logo} />} menu={renderMenu()} />
+          </Container>
+        </Grid>
+        <Grid
+          size={{ xs: 12 }}
+          display={"flex"}
+          alignItems={"stretch"}
+          flexGrow={1}
+        >
+          <Container>
+            <Content>
+              <Routes>
+                <Route path="/" element={<Game />} />
+                <Route
+                  path="/leaderboard"
+                  element={
+                    <ProtectedRoute username={username as string}>
+                      <LeaderBoard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/settings"
+                  element={
+                    <ProtectedRoute username={username as string}>
+                      <Settings />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+            </Content>
+          </Container>
+        </Grid>
+      </Grid>
     </>
   );
 }
