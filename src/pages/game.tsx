@@ -167,8 +167,12 @@ const Game = () => {
           {winner?.winner !== "draw" && (
             <>{winner?.winner === "player1" ? "You won!" : "Computer won!"}</>
           )}
+          <br />
+          <>
+            ({players.player1} v {players.player2})
+          </>
         </Typography>
-        <Typography variant="h2">{renderWinner()}</Typography>
+        <Typography variant="h4">{renderWinner()}</Typography>
 
         <Button
           onClick={handleRestart}
