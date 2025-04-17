@@ -102,6 +102,7 @@ const Game = () => {
           <Grid container display="flex">
             <Grid>
               <TextField
+                sx={{ width: 200 }}
                 id="user-name"
                 label="Set username"
                 defaultValue={""}
@@ -138,10 +139,10 @@ const Game = () => {
           </Typography>
           <p>
             Welcome {username as string}, you seem a worthy opponent. Choose
-            your weapon!
+            your weapon in the game of lizard, paper, rock, scissors, spock.
           </p>
 
-          <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
+          <FormControl sx={{ m: 1, width: 200, mt: 3 }}>
             <Select value={players.player1} onChange={handleGamePlay}>
               <MenuItem disabled value="">
                 Choose your weapon!

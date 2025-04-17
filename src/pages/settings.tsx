@@ -57,7 +57,7 @@ const Settings = () => {
 
       <Grid container sx={{ marginTop: "20px" }}>
         <Grid>
-          <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
+          <FormControl sx={{ m: 1, mt: 3 }}>
             <Button
               sx={{ background: colors.primary, color: colors.white }}
               onClick={handleResetGame}
@@ -74,7 +74,7 @@ const Settings = () => {
         </Grid>
 
         <Grid size={{ xs: 12 }}>
-          <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
+          <FormControl sx={{ m: 1, mt: 3 }}>
             <Grid container display="flex">
               <Grid>
                 <TextField

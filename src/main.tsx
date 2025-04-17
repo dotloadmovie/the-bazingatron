@@ -10,7 +10,7 @@ const theme = createTheme();
 
 theme.typography.h1 = {
   fontFamily: "anton",
-  fontSize: 80,
+  fontSize: 48,
 };
 
 createRoot(document.getElementById("root")!).render(
