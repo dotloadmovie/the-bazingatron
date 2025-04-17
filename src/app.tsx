@@ -24,18 +24,14 @@ function App() {
         display={"flex"}
         sx={{ height: "calc(100vh - 20px)" }}
         direction={"column"}
+        flexWrap={"nowrap"}
       >
         <Grid size={{ xs: 12 }} display={"flex"}>
           <Container>
             <Header logo={<img src={logo} />} menu={renderMenu()} />
           </Container>
         </Grid>
-        <Grid
-          size={{ xs: 12 }}
-          display={"flex"}
-          alignItems={"stretch"}
-          flexGrow={1}
-        >
+        <Grid size={{ xs: 12 }} display={"flex"} flexGrow={1}>
           <Container>
             <Content>
               <Routes>

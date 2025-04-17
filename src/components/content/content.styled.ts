@@ -8,6 +8,8 @@ const ContentStyled = styled.div`
     margin-top: 10px;
     padding: 20px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 `
 
 export {ContentStyled};
